@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SwipeBack" parent="AppThemeNoTitleBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <style name="AppThemeNoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/tab_text_select</item>
+        <item name="colorPrimaryDark">@color/tab_text_select</item>
+        <item name="colorAccent">@color/tab_text_select</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:windowBackground">@color/cut_line</item>
+    </style>
+
 </resources>
