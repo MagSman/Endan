@@ -9,7 +9,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 
-import com.my.xxx.endan.MainActivity;
+import com.my.xxx.endan.activity.MainActivity;
 import com.my.xxx.endan.R;
 
 

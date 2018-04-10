@@ -1,8 +1,9 @@
-package com.my.xxx.endan;
+package com.my.xxx.endan.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.my.xxx.endan.R;
 import com.my.xxx.mylibrary.EZLedView;
 
 import butterknife.BindView;
