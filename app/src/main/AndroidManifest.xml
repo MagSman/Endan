@@ -25,14 +25,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SwipeBack">
-        <!--<activity android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
-        <activity
+        </activity>
+        <!--<activity
             android:name=".PlayLedActivity"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
@@ -40,7 +40,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
         <!--TODO 集成：1.2、添加推送所需要的服务和广播-->
         <service
