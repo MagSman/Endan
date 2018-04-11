@@ -14,21 +14,21 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-      <!--  <com.my.xxx.mylibrary.EZLedView
-            android:id="@+id/ledViewUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:led_color="@color/colorAccent"
-            app:text="up"
-            app:text_size="400sp" />-->
+        <!--  <com.my.xxx.mylibrary.EZLedView
+              android:id="@+id/ledViewUp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              app:led_color="@color/colorAccent"
+              app:text="up"
+              app:text_size="400sp" />-->
         <View
             android:id="@+id/up"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <com.my.xxx.mylibrary.EZLedView
-            android:id="@+id/ledView"
+            android:id="@+id/ledViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ledViewUp"
@@ -36,10 +36,27 @@
             app:led_color="@color/colorAccent"
             app:text="1321"
             app:text_size="100sp" />
+
+        <com.my.xxx.mylibrary.EZLedView
+            android:id="@+id/ledViewImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ledViewUp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:image="@drawable/simpson"
+            app:led_color="@color/colorAccent"
+            app:text_size="180dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/simpson" />
+
         <View
             android:id="@+id/down"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <!--<com.my.xxx.mylibrary.EZLedView
             android:id="@+id/ledViewDown"

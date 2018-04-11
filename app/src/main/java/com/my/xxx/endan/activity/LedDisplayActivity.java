@@ -24,12 +24,8 @@ public class LedDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.scrollView)
     HorizontalScrollView scrollView;
-    @BindView(R.id.ledView)
-    EZLedView ledView;
-    /* @BindView(R.id.ledViewUp)
-     EZLedView ledViewUp;
-     @BindView(R.id.ledViewDown)
-     EZLedView ledViewDown;*/
+    @BindView(R.id.ledViewText)
+    EZLedView ledViewText;
     @BindView(R.id.up)
     View up;
     @BindView(R.id.down)
@@ -38,7 +34,6 @@ public class LedDisplayActivity extends AppCompatActivity {
     Handler handler = new Handler();
     int scrollX = 0;
     int direct = 1;
-    private StringBuilder builder = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,43 +53,18 @@ public class LedDisplayActivity extends AppCompatActivity {
         ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
         layoutParamsDown.width = windowWidth;
         down.setLayoutParams(layoutParamsDown);
-        ledView.setText("你好48964561");
-
+        ledViewText.setText("你好4896");
         handler.post(new Runnable() {
             @Override
             public void run() {
                 scrollView.scrollTo(scrollX, 0);
-                scrollX += (ledView.getLedRadius() + ledView.getLedSpace()) * direct;
-                if (scrollX >= (ledView.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
-                    scrollX = (ledView.getLedRadius() + ledView.getLedSpace()) * direct;
+                scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace()) * direct;
+                if (scrollX >= (ledViewText.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
+                    scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace()) * direct;
                 }
-                Log.i("ledView宽度", "---" + ledView.getWidth());
-                Log.i("scrollView宽度", "---" + scrollView.getWidth());
-                Log.i("屏幕宽度", "---" + windowWidth);
-                Log.i("滚动距离", "---" + scrollX);
                 handler.postDelayed(this, 30);
             }
         });
-       /* handler.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.scrollTo(scrollX, 0);
-                scrollX += (ledView.getLedRadius() + ledView.getLedSpace()) * direct;
-                if (scrollX <= 0 || scrollX >= ledView.getWidth() - scrollView.getWidth()) {
-                    scrollX = (ledView.getLedRadius() + ledView.getLedSpace()) * direct;
-                    // direct = -direct;
-                    Log.i("ledView宽度", "---" + ledView.getWidth());
-                    Log.i("scrollView", "---" + scrollView.getWidth());
-                    Log.i("滚动距离", "---" + scrollX);
-                    Log.i("屏幕宽度", "---" + windowWidth);
-                }
-                Log.i("ledView宽度", "---" + ledView.getWidth());
-                Log.i("scrollView宽度", "---" + scrollView.getWidth());
-                Log.i("屏幕宽度", "---" + windowWidth);
-                Log.i("滚动距离", "---" + scrollX);
-                handler.postDelayed(this, 30);
-            }
-        });*/
     }
 
     public static void startIntent(Context context) {
