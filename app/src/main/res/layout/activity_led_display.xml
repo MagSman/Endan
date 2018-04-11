@@ -7,15 +7,48 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:scrollbars="none">
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
 
-        <com.goyourfly.ezledview.EZLedView
-            android:id="@+id/ledView"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+      <!--  <com.my.xxx.mylibrary.EZLedView
+            android:id="@+id/ledViewUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            />
-    </FrameLayout>
+            app:led_color="@color/colorAccent"
+            app:text="up"
+            app:text_size="400sp" />-->
+        <View
+            android:id="@+id/up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.my.xxx.mylibrary.EZLedView
+            android:id="@+id/ledView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ledViewUp"
+            android:layout_gravity="center"
+            app:led_color="@color/colorAccent"
+            app:text="1321"
+            app:text_size="100sp" />
+        <View
+            android:id="@+id/down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<com.my.xxx.mylibrary.EZLedView
+            android:id="@+id/ledViewDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ledView"
+            android:layout_gravity="center"
+            app:led_color="@color/colorAccent"
+            app:text="down"
+            app:text_size="400sp" />-->
+    </LinearLayout>
 </HorizontalScrollView>
