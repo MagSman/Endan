@@ -1,6 +1,7 @@
 package com.my.xxx.endan.view;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,17 +42,19 @@ public class ColorPickerPopupWindowView {
             }
         });
         ColorPickerView colorPicker = rootView.findViewById(R.id.color_picker_view);
-        final CircleImageView colorShow = rootView.findViewById(R.id.color_show);
+        final View colorShow = rootView.findViewById(R.id.color_show);
+        //Shape绘制实用圆圈，并动态改变圆点的颜色
+        final GradientDrawable background = (GradientDrawable) colorShow.getBackground();
         colorPicker.addOnColorChangedListener(new OnColorChangedListener() {
             @Override
             public void onColorChanged(int i) {
-                colorShow.setBackgroundColor(i);
+                background.setColor(i);
             }
         });
         colorPicker.addOnColorSelectedListener(new OnColorSelectedListener() {
             @Override
             public void onColorSelected(int i) {
-                colorShow.setBackgroundColor(i);
+                background.setColor(i);
             }
         });
         popupWindow = new PopupWindow(rootView, WindowManager.LayoutParams.MATCH_PARENT,
