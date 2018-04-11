@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -14,5 +15,23 @@
         android:layout_height="wrap_content"
         android:text="展示" />
 
+    <com.flask.colorpicker.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:alphaSlider="true"
+        app:alphaSliderView="@+id/v_alpha_slider"
+        app:density="12"
+        app:lightnessSlider="true"
+        app:lightnessSliderView="@+id/v_lightness_slider"
+        android:visibility="gone"
+        app:wheelType="FLOWER" />
+
+    <View
+        android:id="@+id/color"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/color_picker_view"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
