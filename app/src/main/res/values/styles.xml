@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--去掉TitleBar-->
     <style name="SwipeBack" parent="AppThemeNoTitleBar">
         <item name="android:windowIsTranslucent">true</item>
     </style>
@@ -18,6 +19,11 @@
         <item name="windowNoTitle">true</item>
         <item name="android:typeface">sans</item>
         <item name="android:windowBackground">@color/cut_line</item>
+    </style>
+    <!--选择器进出动画-->
+    <style name="PopupWindowStyle">
+        <item name="android:windowEnterAnimation">@anim/anim_left_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_right_out</item>
     </style>
 
 </resources>

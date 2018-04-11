@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
-        //showColorPicker();
 
     }
 
@@ -47,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.start:
-                //LedDisplayActivity.startIntent(this, 1);
-                showReletDayNumberPopupWindowView();
+                //LedDisplayActivity.startIntent(this, 2);
+                showColorPickerPopupWindow();
                 //showColorPicker();
                 break;
         }
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showReletDayNumberPopupWindowView() {
+    private void showColorPickerPopupWindow() {
         if (colorPickerPopupWindowView == null) {
             colorPickerPopupWindowView = new ColorPickerPopupWindowView(context, color);
         } else {

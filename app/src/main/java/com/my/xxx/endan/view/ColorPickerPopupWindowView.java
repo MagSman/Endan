@@ -1,15 +1,12 @@
 package com.my.xxx.endan.view;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.PaintDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-
 
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorChangedListener;
@@ -32,9 +29,17 @@ public class ColorPickerPopupWindowView {
     }
 
     public void initPopupWindow() {
-        rootView = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.popupwindow_color_picker, null, false);
+        rootView = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout
+                .popupwindow_color_picker, null, false);
 
         RelativeLayout pickerBox = rootView.findViewById(R.id.picker_box);
+        RelativeLayout whiteBlock = rootView.findViewById(R.id.white_block);
+        whiteBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
         ColorPickerView colorPicker = rootView.findViewById(R.id.color_picker_view);
         final CircleImageView colorShow = rootView.findViewById(R.id.color_show);
         colorPicker.addOnColorChangedListener(new OnColorChangedListener() {
@@ -49,9 +54,13 @@ public class ColorPickerPopupWindowView {
                 colorShow.setBackgroundColor(i);
             }
         });
-        popupWindow = new PopupWindow(rootView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        popupWindow = new PopupWindow(rootView, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         popupWindow.setFocusable(true);
+        //设置进出动画
+        popupWindow.setAnimationStyle(R.style.PopupWindowStyle);
+
         //设置点击其他地方popwindow消失
         popupWindow.setOutsideTouchable(true);
 
@@ -59,7 +68,7 @@ public class ColorPickerPopupWindowView {
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        popupWindow.setBackgroundDrawable(new PaintDrawable(Color.parseColor("#30000000")));
+        //popupWindow.setBackgroundDrawable(new PaintDrawable(Color.parseColor("#30000000")));
         // 在中央显示
         popupWindow.showAtLocation(container, Gravity.RIGHT, 0, 0);
     }
