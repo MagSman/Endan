@@ -23,19 +23,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
     }
+
+
 
 
     @OnClick({R.id.start})
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.start:
-                LedDisplayActivity.startIntent(this);
+                LedDisplayActivity.startIntent(this, 2);
                 break;
         }
     }
-
 
 }
