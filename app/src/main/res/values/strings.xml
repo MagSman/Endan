@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Endan</string>
+    <string name="color_picker_text">"Funs_Color"</string>
 
-
-    <color name="tab_text_select">#009AEA</color>
-    <color name="cut_line">#f4f5f8</color>
 </resources>

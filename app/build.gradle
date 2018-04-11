@@ -51,4 +51,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
 
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
+
 }

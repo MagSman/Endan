@@ -3,4 +3,76 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="tab_text">#717171</color>
+
+    <color name="tab_text_select">#009AEA</color>
+    <color name="cut_line">#f4f5f8</color>
+    <color name="home_lead_tab">#0fb0f7</color>
+    <color name="text_search_gray">#9a9a9a</color>
+    <color name="text_home_group">#242424</color>
+    <color name="divider">#e0e0e0</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="home_search_back">#e6eeee</color>
+    <color name="home_title">#0e0e0e</color>
+    <color name="home_title2">#aaa9a9</color>
+    <color name="home_text">#343434</color>
+    <color name="fragment_home_topic_item_name">#aaaaaa</color>
+    <color name="home_search_hot_goods_text">#434242</color>>
+    <color name="personal_option_point">#23abec</color>
+    <color name="log_off">#fe3723</color>
+    <color name="item_stock_stick_head_icon_unselect">#c8c9cb</color>
+    <color name="item_stock_stick_head_icon_select">#222222</color>
+    <color name="text_gray">#5c5c5c</color>
+    <color name="text_gray1">#a4a4a4</color>
+    <color name="text_gray2">#393939</color>
+    <color name="text_gray3">#555555</color>
+    <color name="text_gray4">#6c6c6c</color>
+    <color name="text_gray5">#b3b3b3</color>
+    <color name="text_gray8">#cfcfcf</color>
+    <color name="search_tag_back">#b4b4b4</color>
+    <color name="search_tag_text">#434242</color>
+    <color name="resting_password_bottom_text">#c2c2c2</color>
+    <color name="text_price">#f70000</color>
+    <color name="text_price_old">#c8c8c8</color>
+    <color name="red_attention">#f75455</color>
+    <color name="input_phone_hint_">#c2c2c2</color>
+    <color name="loss_password">#019aea</color>
+    <color name="user_read">#8f8f8f</color>
+    <color name="input_cash">#d5d5d5</color>
+    <color name="rating_bar">#ffc90b</color>
+    <color name="rental_order_state_color">#ffba00</color>
+    <color name="text_gray6">#ced0d4</color>
+    <color name="text_gray7">#b9b9b9</color>
+    <color name="text_red">#ff0d0d</color>
+    <color name="dialog_background">#66000000</color>
+    <color name="text_green">#68ad4c</color>
+    <color name="text_gray9">#bcbcbc</color>
+    <color name="text_gray10">#858585</color>
+    <color name="text_gray11">#ababab</color>
+    <color name="loopview_text_color">#434343</color>
+    <color name="text_gray12">#c8cacf</color>
+    <color name="text_gray13">#454545</color>
+    <color name="weixin">#17B51A</color>
+    <color name="zhifubao">#00A0E9</color>
+    <color name="text_gray15">#dfe0e4</color>
+    <color name="text_gray16">#b3b3b3</color>
+
+
+    <color name="calendar_back_first">#038EDF</color>
+    <color name="calendar_back_first_press">#007ab9</color>
+    <color name="calendar_back_between">#74C5F2</color>
+    <color name="calendar_text_select">#ffffff</color>
+    <color name="calendar_text_unselect">#515151</color>
+
+    <color name="green_11B57C">#009aea</color>
+    <color name="black_333333">#333333</color>
+    <color name="line_DDDDDD">#DDDDDD</color>
+    <color name="error_text">#9a9b9f</color>
+    <color name="error_text_bg">#ebedef</color>
+    <color name="click_ripple">#e0e0e0</color>
+    <color name="pay_deadline_yellow">#fffde2</color>
+    <color name="daojishi_backgroud">#878889</color>
+    <color name="calendar_add_cart_bg_unable">#d8d9d9</color>
 </resources>
