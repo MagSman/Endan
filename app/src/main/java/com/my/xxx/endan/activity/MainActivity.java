@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.start:
-                LedDisplayActivity.startIntent(this, 2);
+                LedDisplayActivity.startIntent(this, 1);
                 break;
         }
     }

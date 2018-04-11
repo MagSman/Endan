@@ -1,5 +1,6 @@
 package com.my.xxx.endan.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ public class LedDisplayActivity extends AppCompatActivity {
     TextView text;//普通文字
     @BindView(R.id.image)
     ImageView image;//普通图片
-
     @BindView(R.id.up)
     View up;
     @BindView(R.id.down)
@@ -47,14 +47,9 @@ public class LedDisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_led_display);
         ButterKnife.bind(this);
-        //隐藏状态栏
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().hide();
         getDescId();
     }
 
@@ -90,7 +85,8 @@ public class LedDisplayActivity extends AppCompatActivity {
             public void run() {
                 scrollView.scrollTo(scrollX, 0);
                 scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-                if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth() + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
+                if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth()
+                        + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
                     scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
                 }
                 handler.postDelayed(this, 30);

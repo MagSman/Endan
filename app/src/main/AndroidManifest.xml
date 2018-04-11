@@ -36,11 +36,14 @@
 
         <activity
             android:name=".activity.PlayLedActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape"
+            ></activity>
         <!--展示led-->
         <activity
             android:name=".activity.LedDisplayActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape"
+            >
+        </activity>
 
         <!--TODO 集成：1.2、添加推送所需要的服务和广播-->
         <service
