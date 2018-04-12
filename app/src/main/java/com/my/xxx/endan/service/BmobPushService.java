@@ -41,9 +41,9 @@ public class BmobPushService extends BroadcastReceiver {
         builder.setAutoCancel(true);//点击后消失
         builder.setSmallIcon(R.mipmap.ic_launcher);//设置通知栏消息标题的头像
         builder.setDefaults(NotificationCompat.DEFAULT_SOUND);//设置通知铃声
-       /* builder.setTicker("状态栏显示的文字");
+        builder.setTicker("状态栏显示的文字");
         builder.setContentTitle("标题");
-        builder.setContentText("通知内容");*/
+        builder.setContentText("通知内容");
         builder.setTicker(msg);
         builder.setContentTitle(msg);
         builder.setContentText(msg);

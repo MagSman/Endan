@@ -7,20 +7,26 @@
     android:layout_height="match_parent"
     tools:context="com.my.xxx.endan.activity.MainActivity">
 
+    <include
+        android:id="@+id/display_head"
+        layout="@layout/shwo_horizontal_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
 
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/display_head"
         android:layout_marginTop="50dp"
         android:text="展示" />
-
 
     <View
         android:id="@+id/color"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/color_picker_view"
+        android:layout_below="@+id/display_head"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
 
