@@ -39,10 +39,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //切换文字
     compile 'com.github.MagSman:XTextView:v1.3'
     compile project(path: ':mylibrary')
-    compile 'com.github.QuadFlask:colorpicker:0.0.13'
-
     //Bmob的数据服务SDK
     compile 'cn.bmob.android:bmob-sdk:3.5.7'
     //Bmob的消息推送SDK
