@@ -54,7 +54,7 @@
             android:layout_gravity="center"
             android:visibility="gone"
             app:led_color="@color/colorAccent"
-            app:text="led"
+            app:text="led15415461546156"
             app:text_size="100sp" />
 
         <View
