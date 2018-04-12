@@ -23,6 +23,10 @@ public class Endan extends Application {
 
     private static Endan instance;
 
+    public static Endan getEndanContext(){
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
