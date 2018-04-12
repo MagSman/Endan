@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="正常"
             android:textColor="@color/tab_text_select"
-            android:textSize="100sp"
+            android:textSize="80sp"
             android:visibility="gone" />
 
         <com.my.xxx.mylibrary.EZLedView
@@ -54,7 +54,7 @@
             android:layout_gravity="center"
             android:visibility="gone"
             app:led_color="@color/colorAccent"
-            app:text="1321"
+            app:text="led"
             app:text_size="100sp" />
 
         <View

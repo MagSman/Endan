@@ -2,20 +2,15 @@ package com.my.xxx.endan.activity;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView;
@@ -57,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     int scrollX = 0;
     int styleNunber = 1;
+    int scrollViewWidthOut = 0;//循环体长度(外部)
+    int scrollViewWidthIn = 0;//循环体长度(内部)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
+        initView();
+    }
 
+    private void initView() {
+        //获取桌面宽度
+        final int windowWidth = this.getWindowManager().getDefaultDisplay().getWidth();
+        //设置循环体前宽度
+        ViewGroup.LayoutParams layoutParamsUp = up.getLayoutParams();
+        layoutParamsUp.width = windowWidth;
+        up.setLayoutParams(layoutParamsUp);
+        //设置循环体后宽度
+        ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
+        layoutParamsDown.width = windowWidth;
+        down.setLayoutParams(layoutParamsDown);
     }
 
     @OnClick({R.id.show, R.id.changeStyle, R.id.text_color, R.id.backgroud_color, R.id.display_head})
@@ -105,31 +115,48 @@ public class MainActivity extends AppCompatActivity {
         scrollX = 0;
         switch (styleNunber) {
             case 1:
+                //led风格
                 ledViewImage.setVisibility(View.VISIBLE);
                 ledViewText.setVisibility(View.VISIBLE);
                 text.setVisibility(View.GONE);
                 image.setVisibility(View.GONE);
+                //循环体长度
+                scrollViewWidthOut = ledViewText.getWidth() + ledViewImage.getWidth() + up.getWidth() + down.getWidth();
+                scrollViewWidthIn = ledViewText.getWidth() + ledViewImage.getWidth();
                 break;
             case 2:
+                //正常风格
                 ledViewImage.setVisibility(View.GONE);
                 ledViewText.setVisibility(View.GONE);
                 image.setVisibility(View.VISIBLE);
                 text.setVisibility(View.VISIBLE);
+                //循环体长度
+                scrollViewWidthOut = text.getWidth() + image.getWidth() + up.getWidth() + down.getWidth();
+                scrollViewWidthIn = text.getWidth() + image.getWidth();
                 break;
         }
-        //获取桌面宽度
-        final int windowWidth = this.getWindowManager().getDefaultDisplay().getWidth();
-        //设置循环体前宽度
-        ViewGroup.LayoutParams layoutParamsUp = up.getLayoutParams();
-        layoutParamsUp.width = windowWidth;
-        up.setLayoutParams(layoutParamsUp);
-        //设置循环体后宽度
-        ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
-        layoutParamsDown.width = windowWidth;
-        down.setLayoutParams(layoutParamsDown);
         //开始循环
         timer.start();
     }
+
+
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 30) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            scrollView.scrollTo(scrollX, 0);
+            scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            if (scrollX > scrollViewWidthOut - scrollViewWidthIn) {
+                scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            }
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
+
 
     //显示 颜色选择器
     private void showColorPickerPopupWindow() {
@@ -149,24 +176,6 @@ public class MainActivity extends AppCompatActivity {
             colorPickerPopupWindowView.show();
         }
     }
-
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 30) {
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            scrollView.scrollTo(scrollX, 0);
-            scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-            if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth()
-                    + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
-                scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-            }
-        }
-
-        @Override
-        public void onFinish() {
-
-        }
-    };
 
 
 }
