@@ -1,20 +1,23 @@
 package com.my.xxx.endan.activity;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.my.xxx.endan.R;
-import com.my.xxx.endan.utils.OperationalDataBase;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView;
 import com.my.xxx.mylibrary.EZLedView;
 
@@ -27,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout activity;
     @BindView(R.id.display_head)
     HorizontalScrollView scrollView;//展示控件
+    @BindView(R.id.up)
+    View up;
+    @BindView(R.id.down)
+    View down;
     @BindView(R.id.image)
     ImageView image;//正常图片
     @BindView(R.id.text)
@@ -35,19 +42,21 @@ public class MainActivity extends AppCompatActivity {
     EZLedView ledViewImage;//led图片
     @BindView(R.id.ledViewText)
     EZLedView ledViewText;//led文字
-    @BindView(R.id.up)
-    View up;
-    @BindView(R.id.down)
-    View down;
-    @BindView(R.id.start)
-    Button start;
-    @BindView(R.id.color)
-    View color;
+    @BindView(R.id.show)
+    Button show;//展示
+    @BindView(R.id.changeStyle)
+    Button changeStyle;//切换风格
+    @BindView(R.id.text_color)
+    Button text_color;//文字颜色
+    @BindView(R.id.backgroud_color)
+    Button backgroud_color;//背景颜色
+
+
     Activity context;
     ColorPickerPopupWindowView colorPickerPopupWindowView;
 
-    Handler handler = new Handler();
     int scrollX = 0;
+    int styleNunber = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +67,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    @OnClick({R.id.start, R.id.display_head})
+    @OnClick({R.id.show, R.id.changeStyle, R.id.text_color, R.id.backgroud_color, R.id.display_head})
     public void Click(View view) {
         switch (view.getId()) {
-            case R.id.start:
+            case R.id.show:
+                //展示
                 //LedDisplayActivity.startIntent(this, 2);
                 showColorPickerPopupWindow();
                 disPlay();
                 break;
+            case R.id.changeStyle:
+                //切换风格
+                if (styleNunber == 1) {
+                    styleNunber = 2;
+                } else {
+                    styleNunber = 1;
+                }
+                disPlay();
+                break;
+            case R.id.text_color:
+                //文字颜色
+                break;
+            case R.id.backgroud_color:
+                //背景颜色
+                break;
             case R.id.display_head:
                 //跳转展示
                 LedDisplayActivity.startIntent(this, 2);
-                Log.i("跳转", "-----------");
                 break;
         }
     }
@@ -78,8 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
     //展示
     private void disPlay() {
-
-        switch (2) {
+        timer.cancel();
+        scrollX = 0;
+        switch (styleNunber) {
             case 1:
                 ledViewImage.setVisibility(View.VISIBLE);
                 ledViewText.setVisibility(View.VISIBLE);
@@ -103,41 +127,46 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
         layoutParamsDown.width = windowWidth;
         down.setLayoutParams(layoutParamsDown);
-        ledViewText.setText("你好4896");
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.scrollTo(scrollX, 0);
-                scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-                if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth()
-                        + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
-                    scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-                }
-                handler.postDelayed(this, 30);
-            }
-        });
+        //开始循环
+        timer.start();
     }
 
     //显示 颜色选择器
     private void showColorPickerPopupWindow() {
         if (colorPickerPopupWindowView == null) {
-            colorPickerPopupWindowView = new ColorPickerPopupWindowView(context, color);
+            colorPickerPopupWindowView = new ColorPickerPopupWindowView(context, up);
             colorPickerPopupWindowView.addPickerColorListener(new ColorPickerPopupWindowView.SelecteColorListener() {
                 @Override
                 public void onSelectingColor(int i) {
-                    color.setBackgroundColor(i);
-                    text.setTextColor(i);
                     scrollView.setBackgroundColor(i);
                 }
 
                 @Override
                 public void onSelectedColor(int i) {
-                    color.setBackgroundColor(i);
                 }
             });
         } else {
             colorPickerPopupWindowView.show();
         }
     }
+
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 30) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            scrollView.scrollTo(scrollX, 0);
+            scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth()
+                    + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
+                scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            }
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
+
 
 }

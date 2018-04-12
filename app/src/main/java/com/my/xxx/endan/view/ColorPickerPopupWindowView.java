@@ -102,10 +102,6 @@ public class ColorPickerPopupWindowView {
         }
     }
 
-    public interface onDay {
-        void onDay(String day);
-    }
-
     public interface SelecteColorListener {
         void onSelectingColor(int i);
 

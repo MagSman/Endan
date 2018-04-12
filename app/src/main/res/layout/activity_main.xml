@@ -15,19 +15,33 @@
 
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/display_head"
-        android:layout_marginTop="50dp"
-        android:text="展示" />
+        android:layout_marginTop="40dp"
+        android:text="展示效果" />
 
-    <View
-        android:id="@+id/color"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/display_head"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+    <Button
+        android:id="@+id/changeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/show"
+        android:text="切换风格" />
+
+    <Button
+        android:id="@+id/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/changeStyle"
+        android:text="文字颜色" />
+
+    <Button
+        android:id="@+id/backgroud_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_color"
+        android:text="背景颜色" />
+
 
 </RelativeLayout>
