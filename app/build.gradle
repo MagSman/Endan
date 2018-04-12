@@ -50,7 +50,7 @@ dependencies {
 
     compile 'com.android.support:support-v4:26.+'
     compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
-
+    //颜色选择器
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
 
 }

@@ -3,14 +3,10 @@ package com.my.xxx.endan.activity;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.OnColorChangedListener;
-import com.flask.colorpicker.OnColorSelectedListener;
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView;
 
@@ -21,14 +17,10 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity)
     RelativeLayout activity;
-
     @BindView(R.id.start)
     Button start;
-    @BindView(R.id.color_picker_view)
-    ColorPickerView color_picker_view;
     @BindView(R.id.color)
     View color;
-
     Activity context;
     ColorPickerPopupWindowView colorPickerPopupWindowView;
 
@@ -48,35 +40,25 @@ public class MainActivity extends AppCompatActivity {
             case R.id.start:
                 //LedDisplayActivity.startIntent(this, 2);
                 showColorPickerPopupWindow();
-                //showColorPicker();
                 break;
         }
     }
 
-    private void showColorPicker() {
-        color_picker_view.addOnColorChangedListener(new OnColorChangedListener() {
-            @Override
-            public void onColorChanged(int i) {
-                Log.i("颜色1", " " + i);
-                color.setBackgroundColor(i);
-            }
-        });
-        color_picker_view.addOnColorSelectedListener(new OnColorSelectedListener() {
-            @Override
-            public void onColorSelected(int i) {
-                Log.i("颜色2", " " + i);
-                color.setBackgroundColor(i);
-            }
-        });
-        int selectedColor = color_picker_view.getSelectedColor();
-        Log.i("颜色3", " " + selectedColor);
-
-    }
-
-
+    //显示 颜色选择器
     private void showColorPickerPopupWindow() {
         if (colorPickerPopupWindowView == null) {
             colorPickerPopupWindowView = new ColorPickerPopupWindowView(context, color);
+            colorPickerPopupWindowView.addPickerColorListener(new ColorPickerPopupWindowView.SelecteColorListener() {
+                @Override
+                public void onSelectingColor(int i) {
+                    color.setBackgroundColor(i);
+                }
+
+                @Override
+                public void onSelectedColor(int i) {
+                    color.setBackgroundColor(i);
+                }
+            });
         } else {
             colorPickerPopupWindowView.show();
         }

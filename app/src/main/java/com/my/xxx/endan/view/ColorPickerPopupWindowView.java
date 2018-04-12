@@ -1,6 +1,7 @@
 package com.my.xxx.endan.view;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,12 +17,17 @@ import com.my.xxx.endan.R;
 
 
 public class ColorPickerPopupWindowView {
-    private final int USER_GET_RENT_DATA = 1;
 
     private Activity context;
     private View container;
     private RelativeLayout rootView;
     private PopupWindow popupWindow;
+
+    private SelecteColorListener selectecolorlistener;
+
+    public void addPickerColorListener(SelecteColorListener selectecolorlistener) {
+        this.selectecolorlistener = selectecolorlistener;
+    }
 
     public ColorPickerPopupWindowView(Activity context, View container) {
         this.context = context;
@@ -49,12 +55,14 @@ public class ColorPickerPopupWindowView {
             @Override
             public void onColorChanged(int i) {
                 background.setColor(i);
+                selectecolorlistener.onSelectingColor(i);
             }
         });
         colorPicker.addOnColorSelectedListener(new OnColorSelectedListener() {
             @Override
             public void onColorSelected(int i) {
                 background.setColor(i);
+                selectecolorlistener.onSelectedColor(i);
             }
         });
         popupWindow = new PopupWindow(rootView, WindowManager.LayoutParams.MATCH_PARENT,
@@ -96,6 +104,12 @@ public class ColorPickerPopupWindowView {
 
     public interface onDay {
         void onDay(String day);
+    }
+
+    public interface SelecteColorListener {
+        void onSelectingColor(int i);
+
+        void onSelectedColor(int i);
     }
 
 }
