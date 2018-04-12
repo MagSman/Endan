@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.my.xxx.endan.R;
-import com.my.xxx.endan.utils.AddNewPerson;
+import com.my.xxx.endan.utils.OperationalDataBase;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView;
 
 import butterknife.BindView;
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.start:
                 //LedDisplayActivity.startIntent(this, 2);
                 showColorPickerPopupWindow();
-                AddNewPerson.InsertPerson2Bmob();
-                AddNewPerson.SelectPersonFromBmob();
+                OperationalDataBase.InsertPerson2Bmob();
+                OperationalDataBase.SelectPersonFromBmob();
                 break;
         }
     }

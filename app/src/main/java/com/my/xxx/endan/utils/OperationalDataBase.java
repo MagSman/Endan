@@ -15,7 +15,7 @@ import cn.bmob.v3.listener.UpdateListener;
  * 250135506@qq.com
  */
 
-public class AddNewPerson {
+public class OperationalDataBase {
 
 
     //增
