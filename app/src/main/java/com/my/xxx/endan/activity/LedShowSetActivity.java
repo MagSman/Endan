@@ -75,7 +75,6 @@ public class LedShowSetActivity extends AppCompatActivity {
             case R.id.show:
                 //展示
                 showColorPickerPopupWindow();
-                disPlay();
                 break;
             case R.id.changeStyle:
                 disPlay();
