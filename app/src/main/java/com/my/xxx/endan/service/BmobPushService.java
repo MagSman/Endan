@@ -9,7 +9,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 
-import com.my.xxx.endan.activity.MainActivity;
+import com.my.xxx.endan.activity.LedShowSetActivity;
 import com.my.xxx.endan.R;
 
 
@@ -36,7 +36,7 @@ public class BmobPushService extends BroadcastReceiver {
 
     public static void showNotifictionIcon(Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        Intent intent = new Intent(context, MainActivity.class);//将要跳转的界面
+        Intent intent = new Intent(context, LedShowSetActivity.class);//将要跳转的界面
         //Intent intent = new Intent();//只显示通知，无页面跳转
         builder.setAutoCancel(true);//点击后消失
         builder.setSmallIcon(R.mipmap.ic_launcher);//设置通知栏消息标题的头像

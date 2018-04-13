@@ -27,26 +27,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SwipeBack">
-        <activity android:name=".activity.LedDisplayActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!--led展示设置-->
         <activity
-            android:name=".activity.PlayLedActivity"
+            android:name=".activity.LedShowSetActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
+        <!--Led展示-->
+        <activity
+            android:name=".activity.LedDisplayActivity"
+            android:screenOrientation="sensorLandscape" />
+        <!--正常展示设置-->
+        <activity
+            android:name=".activity.NormalShowSetActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <!--正常展示-->
+        <activity
+            android:name=".activity.NormalDisplay"
             android:screenOrientation="sensorLandscape"></activity>
-        <!--展示led-->
-        <!-- <activity
-             android:name=".activity.LedDisplayActivity"
-             android:screenOrientation="sensorLandscape"
-             >
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>-->
+        <!--个性展示设置-->
+        <activity
+            android:name=".activity.PersonalityActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--欢迎界面-->
+        <activity
+            android:name=".activity.SplashActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
 
         <!--TODO 集成：1.2、添加推送所需要的服务和广播-->
         <service

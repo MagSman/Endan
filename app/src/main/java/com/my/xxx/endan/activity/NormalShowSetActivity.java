@@ -1,5 +1,7 @@
 package com.my.xxx.endan.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
  * 250135506@qq.com
  */
 
-public class PlayLedActivity extends AppCompatActivity {
+public class NormalShowSetActivity extends AppCompatActivity {
 
     @BindView(R.id.led)
     EZLedView led;
@@ -36,5 +38,14 @@ public class PlayLedActivity extends AppCompatActivity {
         led.setLedRadius(4);
         led.setLedSpace(0);
         led.setDrawable(getResources().getDrawable(R.drawable.qaoba));
+    }
+
+
+
+
+
+    public static void startIntent(Context context) {
+        Intent intent = new Intent(context, NormalShowSetActivity.class);
+        context.startActivity(intent);
     }
 }

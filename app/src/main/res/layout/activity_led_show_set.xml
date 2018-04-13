@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.my.xxx.endan.activity.LedShowSetActivity">
+
+    <include
+        android:id="@+id/display_head_led"
+        layout="@layout/shwo_horizontal_scrollview_led"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <ImageView
+        android:id="@+id/choice_iamge"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/display_head_led"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <RelativeLayout
+        android:id="@+id/input_text_box"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/display_head_led"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/choice_iamge"
+        android:background="@drawable/input_banckgroud"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choice_iamge"
+        android:text="展示效果" />
+
+    <Button
+        android:id="@+id/changeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/show"
+        android:text="切换风格" />
+
+    <Button
+        android:id="@+id/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/changeStyle"
+        android:text="文字颜色" />
+
+    <Button
+        android:id="@+id/backgroud_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_color"
+        android:text="背景颜色" />
+
+
+</RelativeLayout>
