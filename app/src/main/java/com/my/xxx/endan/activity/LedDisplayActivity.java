@@ -52,7 +52,7 @@ public class LedDisplayActivity extends AppCompatActivity {
 
     //展示
     private void disPlay() {
-        switch (style) {
+        switch (1) {
             case 1:
                 ledViewImage.setVisibility(View.VISIBLE);
                 ledViewText.setVisibility(View.VISIBLE);
@@ -76,7 +76,7 @@ public class LedDisplayActivity extends AppCompatActivity {
         ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
         layoutParamsDown.width = windowWidth;
         down.setLayoutParams(layoutParamsDown);
-        ledViewText.setText("你好4896");
+        ledViewText.setText("默默");
         handler.post(new Runnable() {
             @Override
             public void run() {

@@ -30,7 +30,7 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正常"
+            android:text=" "
             android:textColor="@color/tab_text_select"
             android:textSize="80sp"
             android:visibility="gone" />
@@ -54,7 +54,7 @@
             android:layout_gravity="center"
             android:visibility="gone"
             app:led_color="@color/colorAccent"
-            app:text="led15415461546156"
+            app:text=" "
             app:text_size="100sp" />
 
         <View

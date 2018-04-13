@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     int scrollX = 0;
     int styleNunber = 1;
-    int scrollViewWidthOut = 0;//循环体长度(外部)
-    int scrollViewWidthIn = 0;//循环体长度(内部)
+    int scrollViewWidthOut ;//循环体长度(外部)
+    int scrollViewWidthIn ;//循环体长度(内部)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
-        initView();
-    }
-
-    private void initView() {
-        //获取桌面宽度
-        final int windowWidth = this.getWindowManager().getDefaultDisplay().getWidth();
-        //设置循环体前宽度
-        ViewGroup.LayoutParams layoutParamsUp = up.getLayoutParams();
-        layoutParamsUp.width = windowWidth;
-        up.setLayoutParams(layoutParamsUp);
-        //设置循环体后宽度
-        ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
-        layoutParamsDown.width = windowWidth;
-        down.setLayoutParams(layoutParamsDown);
     }
 
     @OnClick({R.id.show, R.id.changeStyle, R.id.text_color, R.id.backgroud_color, R.id.display_head})
@@ -93,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     styleNunber = 1;
                 }
+                ledViewText.setText("nianodiandianifweknfqewfqewffewfew");
                 disPlay();
                 break;
             case R.id.text_color:
@@ -113,7 +100,17 @@ public class MainActivity extends AppCompatActivity {
     private void disPlay() {
         timer.cancel();
         scrollX = 0;
-        switch (styleNunber) {
+        //获取桌面宽度
+        final int windowWidth = this.getWindowManager().getDefaultDisplay().getWidth();
+        //设置循环体前宽度
+        ViewGroup.LayoutParams layoutParamsUp = up.getLayoutParams();
+        layoutParamsUp.width = windowWidth;
+        up.setLayoutParams(layoutParamsUp);
+        //设置循环体后宽度
+        ViewGroup.LayoutParams layoutParamsDown = down.getLayoutParams();
+        layoutParamsDown.width = windowWidth;
+        down.setLayoutParams(layoutParamsDown);
+        switch (1) {
             case 1:
                 //led风格
                 ledViewImage.setVisibility(View.VISIBLE);
@@ -145,9 +142,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             scrollView.scrollTo(scrollX, 0);
-            scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            //scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+            scrollX += 10;
             if (scrollX > scrollViewWidthOut - scrollViewWidthIn) {
-                scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+                //scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
+                scrollX = 0;
             }
         }
 

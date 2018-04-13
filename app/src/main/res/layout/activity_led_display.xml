@@ -55,7 +55,7 @@
             android:visibility="gone"
             app:led_color="@color/colorAccent"
             app:text="1321"
-            app:text_size="100sp" />
+            app:text_size="300sp" />
 
         <View
             android:id="@+id/down"
