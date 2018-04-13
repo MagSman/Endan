@@ -9,11 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView;
+import com.my.xxx.endan.view.SelectImageDialog;
 import com.my.xxx.mylibrary.EZLedView;
+import com.yanzhenjie.album.Album;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,10 @@ public class LedShowSetActivity extends AppCompatActivity {
     RelativeLayout activity;
     @BindView(R.id.display_head_led)
     HorizontalScrollView scrollViewLed;//展示控件
+    @BindView(R.id.choice_iamge)
+    ImageView choice_iamge;
+    @BindView(R.id.input_text)
+    EditText input_text;//文字输入框
     @BindView(R.id.up)
     View up;
     @BindView(R.id.down)
@@ -44,6 +53,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
     Activity context;
     ColorPickerPopupWindowView colorPickerPopupWindowView;
+    private SelectImageDialog selectImageDialog;
 
     int scrollX = 0;
 
@@ -53,11 +63,15 @@ public class LedShowSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_led_show_set);
         ButterKnife.bind(this);
         context = this;
+        initChoiceImageDialog();
     }
 
-    @OnClick({R.id.show, R.id.changeStyle, R.id.text_color, R.id.backgroud_color})
+    @OnClick({R.id.show, R.id.choice_iamge, R.id.changeStyle, R.id.text_color, R.id.backgroud_color})
     public void Click(View view) {
         switch (view.getId()) {
+            case R.id.choice_iamge:
+                selectImageDialog.show();
+                break;
             case R.id.show:
                 //展示
                 showColorPickerPopupWindow();
@@ -89,18 +103,19 @@ public class LedShowSetActivity extends AppCompatActivity {
         layoutParamsDown.width = windowWidth;
         down.setLayoutParams(layoutParamsDown);
         ledViewText.setText("123456789");
+        ledViewText.setText(input_text.getText().toString());
         //开始循环
         timer.start();
     }
 
 
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 30) {
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 5) {
         @Override
         public void onTick(long millisUntilFinished) {
             scrollViewLed.scrollTo(scrollX, 0);
-            scrollX += 10;
+            scrollX += 5;
             if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + up.getWidth() + down.getWidth()) - scrollViewLed.getWidth()) {
-                scrollX = 10;
+                scrollX = 5;
             }
         }
 
@@ -135,5 +150,34 @@ public class LedShowSetActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+    /**
+     * 选择图片弹窗
+     */
+    public void initChoiceImageDialog() {
+        if (selectImageDialog == null) {
+            new SelectImageDialog(context);
+        } else {
+            selectImageDialog.setSelect(new SelectImageDialog.OnSelect() {
+                @Override
+                public void openCamera() {
+                    Album.camera(context) // 相机功能。
+                            .image() // 拍照。
+                            .requestCode(2)
+                            // .onResult((requestCode, result) -> upLoadImg(result))
+                            .start();
+                }
 
+                @Override
+                public void openGallery() {
+                    Album.image(context)
+                            .singleChoice()
+                            .requestCode(200)
+                            .camera(true)
+                            .columnCount(3)
+                            //.onResult((requestCode, result) -> upLoadImg(result.get(0).getPath()))
+                            .start();
+                }
+            });
+        }
+    }
 }
