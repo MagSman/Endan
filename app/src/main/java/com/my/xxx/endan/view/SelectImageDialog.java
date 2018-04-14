@@ -9,7 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.my.xxx.endan.view.NsButton;
 import com.my.xxx.endan.R;
 
 
@@ -61,12 +60,6 @@ public class SelectImageDialog {
         btn_photo = (NsButton) window.findViewById(R.id.btn_photo);
         btn_cancle = (NsButton) window.findViewById(R.id.btn_cancle);
         //图库选择
-     /*   btn_picture.setOnClickListener(v -> {
-            if (select != null) {
-                select.openGallery();
-            }
-            dialog.dismiss();
-        });*/
         btn_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,12 +70,6 @@ public class SelectImageDialog {
             }
         });
         //拍照选择
-   /*     btn_photo.setOnClickListener(v -> {
-            if (select != null) {
-                select.openCamera();
-            }
-            dialog.dismiss();
-        });*/
         btn_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +80,6 @@ public class SelectImageDialog {
             }
         });
         //取消
-        //btn_cancle.setOnClickListener(v -> dialog.dismiss());
         btn_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
