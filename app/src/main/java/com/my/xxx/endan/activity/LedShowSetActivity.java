@@ -72,6 +72,9 @@ public class LedShowSetActivity extends AppCompatActivity {
         context = this;
         //初始化选择图片dialog
         initChoiceImageDialog();
+        /* led.setLedRadius(4);
+        led.setLedSpace(0);
+        led.setDrawable(getResources().getDrawable(R.drawable.qaoba));*/
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
