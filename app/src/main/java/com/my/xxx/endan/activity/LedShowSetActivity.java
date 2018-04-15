@@ -3,9 +3,9 @@ package com.my.xxx.endan.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +15,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.my.xxx.endan.R;
-import com.my.xxx.endan.view.ColorPickerPopupWindowView;
+import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
+import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
 import com.my.xxx.endan.view.SelectImageDialog;
 import com.my.xxx.mylibrary.EZLedView;
 import com.yanzhenjie.album.Album;
@@ -25,6 +26,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LedShowSetActivity extends AppCompatActivity {
+    private final int TEXTCOLOR = 0x001;
+    private final int BANGCKGROUNDCOLOR = 0x002;
+
+
     @BindView(R.id.activity)
     RelativeLayout activity;
     @BindView(R.id.display_head_led)
@@ -42,20 +47,22 @@ public class LedShowSetActivity extends AppCompatActivity {
     @BindView(R.id.ledViewText)
     EZLedView ledViewText;//led文字
     @BindView(R.id.show)
-    Button show;//展示
-    @BindView(R.id.changeStyle)
-    Button changeStyle;//切换风格
+    Button show;//效果预览
     @BindView(R.id.text_color)
     Button text_color;//文字颜色
     @BindView(R.id.backgroud_color)
-    Button backgroud_color;//背景颜色
+    Button changeStyle;//切换风格
+    @BindView(R.id.text_size)
+    Button text_size;//字号
 
 
     Activity context;
-    ColorPickerPopupWindowView colorPickerPopupWindowView;
+    ColorPickerPopupWindowView1 colorPickerPopupWindowView1;
+    ColorPickerPopupWindowView2 colorPickerPopupWindowView2;
     private SelectImageDialog selectImageDialog;
 
     int scrollX = 0;
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +70,12 @@ public class LedShowSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_led_show_set);
         ButterKnife.bind(this);
         context = this;
+        //初始化选择图片dialog
         initChoiceImageDialog();
     }
 
-    @OnClick({R.id.show, R.id.choice_iamge, R.id.changeStyle, R.id.text_color, R.id.backgroud_color})
+    @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
+            .backgroud_color})
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.choice_iamge:
@@ -74,16 +83,19 @@ public class LedShowSetActivity extends AppCompatActivity {
                 break;
             case R.id.show:
                 //展示
-                showColorPickerPopupWindow();
-                break;
-            case R.id.changeStyle:
                 disPlay();
                 break;
             case R.id.text_color:
+                showColorPickerPopupWindow1();
                 //文字颜色
                 break;
             case R.id.backgroud_color:
                 //背景颜色
+                showColorPickerPopupWindow2();
+                break;
+            case R.id.text_size:
+                //设置字号
+
                 break;
         }
     }
@@ -113,7 +125,8 @@ public class LedShowSetActivity extends AppCompatActivity {
         public void onTick(long millisUntilFinished) {
             scrollViewLed.scrollTo(scrollX, 0);
             scrollX += 5;
-            if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + up.getWidth() + down.getWidth()) - scrollViewLed.getWidth()) {
+            if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + up.getWidth() +
+                    down.getWidth()) - scrollViewLed.getWidth()) {
                 scrollX = 5;
             }
         }
@@ -126,10 +139,31 @@ public class LedShowSetActivity extends AppCompatActivity {
 
 
     //显示 颜色选择器
-    private void showColorPickerPopupWindow() {
-        if (colorPickerPopupWindowView == null) {
-            colorPickerPopupWindowView = new ColorPickerPopupWindowView(context, up);
-            colorPickerPopupWindowView.addPickerColorListener(new ColorPickerPopupWindowView.SelecteColorListener() {
+    private void showColorPickerPopupWindow1() {
+        if (colorPickerPopupWindowView1 == null) {
+            colorPickerPopupWindowView1 = new ColorPickerPopupWindowView1(context, up);
+            colorPickerPopupWindowView1.addPickerColorListener(new ColorPickerPopupWindowView1
+                    .SelecteColorListener1() {
+                @Override
+                public void onSelectingColor(int i) {
+                    ledViewText.setLedColor(i);
+                }
+
+                @Override
+                public void onSelectedColor(int i) {
+                    ledViewText.setLedColor(i);
+                }
+            });
+        } else {
+            colorPickerPopupWindowView1.show();
+        }
+    }
+
+    private void showColorPickerPopupWindow2() {
+        if (colorPickerPopupWindowView2 == null) {
+            colorPickerPopupWindowView2 = new ColorPickerPopupWindowView2(context, up);
+            colorPickerPopupWindowView2.addPickerColorListener(new ColorPickerPopupWindowView2
+                    .SelecteColorListener2() {
                 @Override
                 public void onSelectingColor(int i) {
                     scrollViewLed.setBackgroundColor(i);
@@ -137,10 +171,11 @@ public class LedShowSetActivity extends AppCompatActivity {
 
                 @Override
                 public void onSelectedColor(int i) {
+                    scrollViewLed.setBackgroundColor(i);
                 }
             });
         } else {
-            colorPickerPopupWindowView.show();
+            colorPickerPopupWindowView2.show();
         }
     }
 
@@ -153,30 +188,28 @@ public class LedShowSetActivity extends AppCompatActivity {
      * 选择图片弹窗
      */
     public void initChoiceImageDialog() {
-        if (selectImageDialog == null) {
-            new SelectImageDialog(context);
-        } else {
-            selectImageDialog.setSelect(new SelectImageDialog.OnSelect() {
-                @Override
-                public void openCamera() {
-                    Album.camera(context) // 相机功能。
-                            .image() // 拍照。
-                            .requestCode(2)
-                            // .onResult((requestCode, result) -> upLoadImg(result))
-                            .start();
-                }
+        selectImageDialog = new SelectImageDialog(this);
+        selectImageDialog.setSelect(new SelectImageDialog.OnSelect() {
+            @Override
+            public void openCamera() {
+                Album.camera(context) // 相机功能。
+                        .image() // 拍照。
+                        .requestCode(2)
+                        // .onResult((requestCode, result) -> upLoadImg(result))
+                        .start();
+            }
 
-                @Override
-                public void openGallery() {
-                    Album.image(context)
-                            .singleChoice()
-                            .requestCode(200)
-                            .camera(true)
-                            .columnCount(3)
-                            //.onResult((requestCode, result) -> upLoadImg(result.get(0).getPath()))
-                            .start();
-                }
-            });
-        }
+            @Override
+            public void openGallery() {
+                Album.image(context)
+                        .singleChoice()
+                        .requestCode(200)
+                        .camera(true)
+                        .columnCount(3)
+                        //.onResult((requestCode, result) -> upLoadImg(result.get(0).getPath()))
+                        .start();
+            }
+        });
+
     }
 }
