@@ -146,12 +146,16 @@ public class LedShowSetActivity extends AppCompatActivity {
                     .SelecteColorListener1() {
                 @Override
                 public void onSelectingColor(int i) {
+                    timer.cancel();
                     ledViewText.setLedColor(i);
+                    timer.start();
                 }
 
                 @Override
                 public void onSelectedColor(int i) {
+                    timer.cancel();
                     ledViewText.setLedColor(i);
+                    timer.start();
                 }
             });
         } else {
