@@ -51,10 +51,10 @@
         android:id="@+id/show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="效果预览"
-        android:layout_below="@+id/choice_iamge"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/choice_iamge"
+        android:text="效果预览" />
 
     <Button
         android:id="@+id/text_color"
