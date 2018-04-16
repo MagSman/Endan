@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <include
-        layout="@layout/show_horizontal_scrollview_text"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        />
+    <falltextview.FallTextView
+        android:id="@+id/fall"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/fall_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fall"
+        android:layout_centerHorizontal="true" />
+
+    <scaletxetview.ScaleTextView
+        android:id="@+id/scale"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/fall_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/scale_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scale"
+        android:layout_centerHorizontal="true" />
+
+    <evaporatetextview.EvaporateTextView
+        android:id="@+id/evaporate"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/scale_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/evaporate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evaporate"
+        android:layout_centerHorizontal="true" />
+
+    <typertextview.TyperTextView
+        android:id="@+id/typer"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/evaporate_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/typer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/typer"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

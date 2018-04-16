@@ -21,6 +21,8 @@ import com.my.xxx.endan.view.SelectImageDialog;
 import com.my.xxx.mylibrary.EZLedView;
 import com.yanzhenjie.album.Album;
 
+import java.lang.annotation.ElementType;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -72,9 +74,11 @@ public class LedShowSetActivity extends AppCompatActivity {
         context = this;
         //初始化选择图片dialog
         initChoiceImageDialog();
-        /* led.setLedRadius(4);
-        led.setLedSpace(0);
-        led.setDrawable(getResources().getDrawable(R.drawable.qaoba));*/
+        ledViewImage.setLedRadius(2);
+        ledViewImage.setLedSpace(1);
+        ledViewImage.setDrawable(getResources().getDrawable(R.drawable.wangwenxi));
+        ledViewText.setLedRadius(4);
+        ledViewText.setLedSpace(2);
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
