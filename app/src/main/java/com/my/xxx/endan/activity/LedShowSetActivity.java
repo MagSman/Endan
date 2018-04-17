@@ -16,7 +16,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
@@ -24,8 +23,6 @@ import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
 import com.my.xxx.endan.view.SelectImageDialog;
 import com.my.xxx.mylibrary.EZLedView;
 import com.yanzhenjie.album.Album;
-
-import java.lang.annotation.ElementType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -277,7 +274,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                 Album.camera(context) // 相机功能。
                         .image() // 拍照。
                         .requestCode(2)
-                        // .onResult((requestCode, result) -> upLoadImg(result))
+                        //.onResult((requestCode, result) -> putPicture2View(result))
                         .start();
             }
 
@@ -292,6 +289,13 @@ public class LedShowSetActivity extends AppCompatActivity {
                         .start();
             }
         });
+
+    }
+
+
+
+
+    public void putPicture2View(String string){
 
     }
 }

@@ -14,7 +14,7 @@ import com.flask.colorpicker.OnColorChangedListener;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.my.xxx.endan.R;
 
-//选择器1
+//颜色选择器1
 public class ColorPickerPopupWindowView1 {
 
     private Activity context;
