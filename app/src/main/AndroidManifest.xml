@@ -57,7 +57,23 @@
             android:name=".activity.PersonalityActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustResize" />
-
+        <!--下落展示-->
+        <activity
+            android:name=".activity.PersonalityDisplayFallActivity"
+            android:screenOrientation="sensorLandscape" />
+        <!--打字机-->
+        <activity
+            android:name=".activity.PersonalityDisplayTyperActivity"
+            android:screenOrientation="sensorLandscape" />
+        <!--蒸发-->
+        <activity
+            android:name=".activity.PersonalityDisplayEvaporateActivity"
+            android:screenOrientation="sensorLandscape" />
+        <!--交叉替换-->
+        <activity
+            android:name=".activity.PersonalityDisplayScaleActivity"
+            android:screenOrientation="sensorLandscape" />
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!--欢迎界面-->
         <activity
             android:name=".activity.SplashActivity"
