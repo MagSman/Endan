@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +15,8 @@ import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
@@ -56,6 +60,12 @@ public class LedShowSetActivity extends AppCompatActivity {
     Button changeStyle;//切换风格
     @BindView(R.id.text_size)
     Button text_size;//字号
+    @BindView(R.id.text_size_seekbar)
+    SeekBar text_size_seekbar;
+    @BindView(R.id.speed_seekbar)
+    SeekBar speed_seekbar;
+    @BindView(R.id.to_led_show)
+    Button to_led_show;
 
 
     Activity context;
@@ -65,6 +75,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
     int scrollX = 0;
     int textSize;
+    int speedNumber = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +84,72 @@ public class LedShowSetActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         context = this;
         //初始化选择图片dialog
+        initView();
         initChoiceImageDialog();
+
+    }
+
+    private void initView() {
         ledViewImage.setLedRadius(2);
         ledViewImage.setLedSpace(1);
         ledViewImage.setDrawable(getResources().getDrawable(R.drawable.wangwenxi));
         ledViewText.setLedRadius(4);
         ledViewText.setLedSpace(2);
+        text_size_seekbar.setProgress(ledViewText.getLedTextSize());
+        text_size_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ledViewText.setLedTextSize(i);
+                ledViewText.requestLayout();
+                ledViewText.invalidate();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        speed_seekbar.setProgress(10);
+        speed_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                speedNumber = i;
+                disPlay();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        input_text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ledViewText.setText(input_text.getText().toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
@@ -99,10 +170,6 @@ public class LedShowSetActivity extends AppCompatActivity {
             case R.id.backgroud_color:
                 //背景颜色
                 showColorPickerPopupWindow2();
-                break;
-            case R.id.text_size:
-                //设置字号
-
                 break;
         }
     }
@@ -127,7 +194,7 @@ public class LedShowSetActivity extends AppCompatActivity {
     }
 
 
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 5) {
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, speedNumber) {
         @Override
         public void onTick(long millisUntilFinished) {
             scrollViewLed.scrollTo(scrollX, 0);
@@ -153,16 +220,20 @@ public class LedShowSetActivity extends AppCompatActivity {
                     .SelecteColorListener1() {
                 @Override
                 public void onSelectingColor(int i) {
-                    timer.cancel();
+                    //timer.cancel();
                     ledViewText.setLedColor(i);
-                    timer.start();
+                    ledViewText.requestLayout();
+                    ledViewText.invalidate();
+                    //timer.start();
                 }
 
                 @Override
                 public void onSelectedColor(int i) {
-                    timer.cancel();
+                    //timer.cancel();
                     ledViewText.setLedColor(i);
-                    timer.start();
+                    ledViewText.requestLayout();
+                    ledViewText.invalidate();
+                    //timer.start();
                 }
             });
         } else {

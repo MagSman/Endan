@@ -75,4 +75,10 @@
     <color name="pay_deadline_yellow">#fffde2</color>
     <color name="daojishi_backgroud">#878889</color>
     <color name="calendar_add_cart_bg_unable">#d8d9d9</color>
+
+    <color name="led_color1">#66ffff</color>
+    <color name="led_color">#33ffcc</color>
+    <color name="led_color2">#33ff99</color>
+    <color name="led_color3">#66ffff</color>
+
 </resources>

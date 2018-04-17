@@ -2,30 +2,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:background="@color/text_home_group"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="LED 应援团"
+        android:textColor="@color/led_color"
+        android:textSize="45sp" />
 
 
     <Button
         android:id="@+id/led_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:text="LedStyle" />
+        android:layout_below="@+id/app_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_backgroud"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="LED风格"
+        android:textColor="@color/led_color"
+        android:textSize="30sp" />
+
 
     <Button
         android:id="@+id/normal_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/led_style"
-        android:text="NormalStyle" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_backgroud"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="图文风格"
+        android:textColor="@color/led_color"
+        android:textSize="30sp" />
+
 
     <Button
         android:id="@+id/personality_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/normal_style"
-        android:text="Personality" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_backgroud"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Personality"
+        android:textColor="@color/led_color"
+        android:textSize="30sp" />
 
 
 </RelativeLayout>

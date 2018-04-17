@@ -5,6 +5,7 @@
     android:id="@+id/activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/text_home_group"
     tools:context="com.my.xxx.endan.activity.LedShowSetActivity">
 
     <include
@@ -49,33 +50,110 @@
 
     <Button
         android:id="@+id/show"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/choice_iamge"
-        android:text="效果预览" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_backgroud"
+        android:text="效果预览"
+        android:textColor="@color/led_color"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/text_color"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/show"
-        android:text="文字颜色" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_backgroud"
+        android:text="文字颜色"
+        android:textColor="@color/led_color"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/backgroud_color"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_color"
-        android:text="背景颜色" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/show"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_backgroud"
+        android:text="背景颜色"
+        android:textColor="@color/led_color"
+        android:textSize="17sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/text_size_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backgroud_color">
+
+        <Button
+            android:id="@+id/text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_backgroud"
+            android:text="字号"
+            android:textColor="@color/led_color"
+            android:textSize="17sp" />
+
+        <SeekBar
+            android:id="@+id/text_size_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/text_size"
+            android:max="600" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/speed_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_size_box">
+
+        <Button
+            android:id="@+id/speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_backgroud"
+            android:text="速度"
+            android:textColor="@color/led_color"
+            android:textSize="17sp" />
+
+        <SeekBar
+            android:id="@+id/speed_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/speed"
+            android:max="20" />
+    </RelativeLayout>
 
     <Button
-        android:id="@+id/text_size"
-        android:layout_width="wrap_content"
+        android:id="@+id/to_led_show"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backgroud_color"
-        android:text="字号" />
-
-
+        android:layout_below="@+id/speed_box"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_backgroud"
+        android:text="应援"
+        android:textColor="@color/led_color"
+        android:textSize="20sp" />
 </RelativeLayout>
