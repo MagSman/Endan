@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.my.xxx.endan.R;
 
+import basetextview.AnimationListener;
+import basetextview.HTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import falltextview.FallTextView;
@@ -29,19 +32,11 @@ public class PersonalityDisplayTyperActivity extends AppCompatActivity {
     TyperTextView fall2;
 
     String[] sentences = {"What is design?",
-            "Design is not just",
-            "what it looks like and feels like.",
             "Design is how it works. - Steve Jobs",
-            "Older people",
-            "sit down and ask,",
-            "'What is it?'",
-            "but the boy asks,",
-            "'What can I do with it?'. - Steve Jobs",
-            "Swift",
-            "Objective-C",
-            "iPhone",
-            "iPad",
-            "Mac Mini", "MacBook Pro", "Mac Pro"};
+            "你好",
+            "今天是星期二，明天是星期三，昨天是星期一",
+            "明天是星期三，后天是星期四",
+            "Mac Pro"};
 
     int index;
     int input_index;
@@ -57,7 +52,7 @@ public class PersonalityDisplayTyperActivity extends AppCompatActivity {
 
 
     //循环展示
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 4000) {
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 6000) {
         @Override
         public void onTick(long millisUntilFinished) {
             if (index + 1 >= sentences.length) {
@@ -66,11 +61,19 @@ public class PersonalityDisplayTyperActivity extends AppCompatActivity {
             input_index = index++;
 
             if (sentences[input_index].length() >= 28) {
+                fall2.setVisibility(View.VISIBLE);
                 String substring1 = sentences[input_index].substring(0, 28);
-                String substring2 = sentences[input_index].substring(28, sentences[input_index].length());
+                final String substring2 = sentences[input_index].substring(28, sentences[input_index].length());
                 fall1.animateText(substring1.trim());
-                fall2.animateText(substring2.trim());
+                fall1.setAnimationListener(new AnimationListener() {
+                    @Override
+                    public void onAnimationEnd(HTextView hTextView) {
+                        fall2.animateText(substring2.trim());
+                    }
+                });
+
             } else {
+                fall2.setVisibility(View.GONE);
                 fall1.animateText(sentences[input_index]);
                 fall2.animateText("");
             }

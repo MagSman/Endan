@@ -28,19 +28,11 @@ public class PersonalityDisplayFallActivity extends AppCompatActivity {
     FallTextView fall2;
 
     String[] sentences = {"What is design?",
-            "Design is not just",
-            "what it looks like and feels like.",
             "Design is how it works. - Steve Jobs",
-            "Older people",
-            "sit down and ask,",
-            "'What is it?'",
-            "but the boy asks,",
-            "'What can I do with it?'. - Steve Jobs",
-            "Swift",
-            "Objective-C",
-            "iPhone",
-            "iPad",
-            "Mac Mini", "MacBook Pro", "Mac Pro"};
+            "你好",
+            "今天是星期二，明天是星期三，昨天是星期一",
+            "明天是星期三，后天是星期四",
+            "Mac Pro"};
 
     int index;
     int input_index;
@@ -56,7 +48,7 @@ public class PersonalityDisplayFallActivity extends AppCompatActivity {
 
 
     //循环展示
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 4000) {
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 3000) {
         @Override
         public void onTick(long millisUntilFinished) {
             if (index + 1 >= sentences.length) {
