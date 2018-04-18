@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,21 +18,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
+import com.bumptech.glide.Glide;
 import com.my.xxx.endan.R;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
+import com.my.xxx.endan.view.EZLedView;
 import com.my.xxx.endan.view.SelectImageDialog;
-import com.my.xxx.mylibrary.EZLedView;
+import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumFile;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LedShowSetActivity extends AppCompatActivity {
-    private final int TEXTCOLOR = 0x001;
-    private final int BANGCKGROUNDCOLOR = 0x002;
-
 
     @BindView(R.id.activity)
     RelativeLayout activity;
@@ -45,8 +48,6 @@ public class LedShowSetActivity extends AppCompatActivity {
     View up;
     @BindView(R.id.down)
     View down;
-    @BindView(R.id.ledViewImage)
-    EZLedView ledViewImage;//led图片
     @BindView(R.id.ledViewText)
     EZLedView ledViewText;//led文字
     @BindView(R.id.show)
@@ -63,6 +64,8 @@ public class LedShowSetActivity extends AppCompatActivity {
     SeekBar speed_seekbar;
     @BindView(R.id.to_led_show)
     Button to_led_show;
+    @BindView(R.id.image)
+    ImageView image;//图片
 
 
     Activity context;
@@ -71,7 +74,6 @@ public class LedShowSetActivity extends AppCompatActivity {
     private SelectImageDialog selectImageDialog;
 
     int scrollX = 0;
-    int textSize;
     int speedNumber = 10;
 
     @Override
@@ -80,16 +82,13 @@ public class LedShowSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_led_show_set);
         ButterKnife.bind(this);
         context = this;
-        //初始化选择图片dialog
         initView();
+        //初始化选择图片dialog
         initChoiceImageDialog();
 
     }
 
     private void initView() {
-        ledViewImage.setLedRadius(2);
-        ledViewImage.setLedSpace(1);
-        ledViewImage.setDrawable(getResources().getDrawable(R.drawable.wangwenxi));
         ledViewText.setLedRadius(4);
         ledViewText.setLedSpace(2);
         text_size_seekbar.setProgress(ledViewText.getLedTextSize());
@@ -134,17 +133,15 @@ public class LedShowSetActivity extends AppCompatActivity {
         input_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ledViewText.setText(input_text.getText().toString());
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                ledViewText.setText(input_text.getText().toString());
             }
         });
     }
@@ -196,7 +193,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         public void onTick(long millisUntilFinished) {
             scrollViewLed.scrollTo(scrollX, 0);
             scrollX += 5;
-            if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + up.getWidth() +
+            if (scrollX >= (ledViewText.getWidth() + image.getWidth() + up.getWidth() +
                     down.getWidth()) - scrollViewLed.getWidth()) {
                 scrollX = 5;
             }
@@ -217,20 +214,16 @@ public class LedShowSetActivity extends AppCompatActivity {
                     .SelecteColorListener1() {
                 @Override
                 public void onSelectingColor(int i) {
-                    //timer.cancel();
                     ledViewText.setLedColor(i);
                     ledViewText.requestLayout();
                     ledViewText.invalidate();
-                    //timer.start();
                 }
 
                 @Override
                 public void onSelectedColor(int i) {
-                    //timer.cancel();
                     ledViewText.setLedColor(i);
                     ledViewText.requestLayout();
                     ledViewText.invalidate();
-                    //timer.start();
                 }
             });
         } else {
@@ -269,15 +262,23 @@ public class LedShowSetActivity extends AppCompatActivity {
     public void initChoiceImageDialog() {
         selectImageDialog = new SelectImageDialog(this);
         selectImageDialog.setSelect(new SelectImageDialog.OnSelect() {
+            //手机拍照
             @Override
             public void openCamera() {
                 Album.camera(context) // 相机功能。
                         .image() // 拍照。
                         .requestCode(2)
-                        //.onResult((requestCode, result) -> putPicture2View(result))
+                        .onResult(new Action<String>() {
+                            @Override
+                            public void onAction(int requestCode, @NonNull String result) {
+                                image.setVisibility(View.VISIBLE);
+                                Glide.with(context).load(result).into(image);
+                            }
+                        })
                         .start();
             }
 
+            //选择相册
             @Override
             public void openGallery() {
                 Album.image(context)
@@ -285,17 +286,17 @@ public class LedShowSetActivity extends AppCompatActivity {
                         .requestCode(200)
                         .camera(true)
                         .columnCount(3)
-                        //.onResult((requestCode, result) -> upLoadImg(result.get(0).getPath()))
+                        .onResult(new Action<ArrayList<AlbumFile>>() {
+                            @Override
+                            public void onAction(int requestCode, @NonNull ArrayList<AlbumFile> result) {
+                                image.setVisibility(View.VISIBLE);
+                                Glide.with(context).load(result.get(0).getPath()).into(image);
+                            }
+                        })
                         .start();
             }
         });
 
     }
 
-
-
-
-    public void putPicture2View(String string){
-
-    }
 }

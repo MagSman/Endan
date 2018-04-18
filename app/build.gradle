@@ -42,7 +42,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //切换文字
     compile 'com.github.MagSman:XTextView:v1.3'
-    compile project(path: ':mylibrary')
     //Bmob的数据服务SDK
     compile 'cn.bmob.android:bmob-sdk:3.5.7'
     //Bmob的消息推送SDK

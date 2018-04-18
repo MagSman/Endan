@@ -156,4 +156,5 @@
         android:text="应援"
         android:textColor="@color/led_color"
         android:textSize="20sp" />
+
 </RelativeLayout>
