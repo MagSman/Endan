@@ -5,13 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,10 +28,7 @@ import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,7 +74,12 @@ public class LedShowSetActivity extends AppCompatActivity {
     private SelectImageDialog selectImageDialog;
 
     int scrollX = 0;
-    int speedNumber = 10;
+    int speedNumber = 6;
+    int textColor;
+    int backgroudColor;
+    int textSize;
+    String textInfo;
+    String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +101,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         text_size_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                textSize = i;
                 ledViewText.setLedTextSize(i);
                 ledViewText.requestLayout();
                 ledViewText.invalidate();
@@ -147,13 +147,15 @@ public class LedShowSetActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                textInfo = input_text.getText().toString();
                 ledViewText.setText(input_text.getText().toString());
+
             }
         });
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
-            .backgroud_color})
+            .backgroud_color, R.id.to_led_show})
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.choice_iamge:
@@ -170,6 +172,13 @@ public class LedShowSetActivity extends AppCompatActivity {
             case R.id.backgroud_color:
                 //背景颜色
                 showColorPickerPopupWindow2();
+                break;
+            case R.id.to_led_show:
+                //去应援
+                if (backgroudColor == 0) {
+                    backgroudColor = 7649793;
+                }
+                LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize, speedNumber, imagePath, textInfo);
                 break;
         }
     }
@@ -191,7 +200,6 @@ public class LedShowSetActivity extends AppCompatActivity {
         ledViewText.setText(input_text.getText().toString());
         //开始循环
         timer.start();
-        Log.i("速度", speedNumber + "");
     }
 
 
@@ -227,6 +235,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
                 @Override
                 public void onSelectedColor(int i) {
+                    textColor = i;
                     ledViewText.setLedColor(i);
                     ledViewText.requestLayout();
                     ledViewText.invalidate();
@@ -237,6 +246,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         }
     }
 
+    //选择背景颜色
     private void showColorPickerPopupWindow2() {
         if (colorPickerPopupWindowView2 == null) {
             colorPickerPopupWindowView2 = new ColorPickerPopupWindowView2(context, up);
@@ -249,6 +259,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
                 @Override
                 public void onSelectedColor(int i) {
+                    backgroudColor = i;
                     scrollViewLed.setBackgroundColor(i);
                 }
             });
@@ -277,6 +288,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                         .onResult(new Action<String>() {
                             @Override
                             public void onAction(int requestCode, @NonNull String result) {
+                                imagePath = result;
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result).into(image);
                                 disPlay();
@@ -296,6 +308,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                         .onResult(new Action<ArrayList<AlbumFile>>() {
                             @Override
                             public void onAction(int requestCode, @NonNull ArrayList<AlbumFile> result) {
+                                imagePath = result.get(0).getPath();
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result.get(0).getPath()).into(image);
                                 disPlay();

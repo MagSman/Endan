@@ -3,6 +3,7 @@ package com.my.xxx.endan.utils;
 import android.util.Log;
 
 import com.my.xxx.endan.bean.Person;
+import com.my.xxx.endan.bean.Star;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
@@ -80,5 +81,12 @@ public class OperationalDataBase {
                 }
             }
         });
+    }
+
+    //保存图片
+    public static void SaveImage() {
+        Star star = new Star();
+
+
     }
 }

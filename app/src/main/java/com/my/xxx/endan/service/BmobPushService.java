@@ -5,7 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 
@@ -27,7 +27,6 @@ public class BmobPushService extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(PushConstants.ACTION_MESSAGE)) {
-            //Log.d("bmob", "客户端收到推送内容：" + intent.getStringExtra("msg"));
             Toast.makeText(context, intent.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
             msg = intent.getStringExtra("msg");
             showNotifictionIcon(context);
