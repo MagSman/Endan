@@ -13,7 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.xxx.endan.R;
-import com.my.xxx.mylibrary.EZLedView;
+import com.my.xxx.endan.view.EZLedView;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,10 +26,6 @@ public class LedDisplayActivity extends AppCompatActivity {
     HorizontalScrollView scrollView;
     @BindView(R.id.ledViewText)
     EZLedView ledViewText;//Led文字
-    @BindView(R.id.ledViewImage)
-    EZLedView ledViewImage;//Led图片
-    @BindView(R.id.text)
-    TextView text;//普通文字
     @BindView(R.id.image)
     ImageView image;//普通图片
     @BindView(R.id.up)
@@ -52,20 +49,6 @@ public class LedDisplayActivity extends AppCompatActivity {
 
     //展示
     private void disPlay() {
-        switch (1) {
-            case 1:
-                ledViewImage.setVisibility(View.VISIBLE);
-                ledViewText.setVisibility(View.VISIBLE);
-                text.setVisibility(View.GONE);
-                image.setVisibility(View.GONE);
-                break;
-            case 2:
-                ledViewImage.setVisibility(View.GONE);
-                ledViewText.setVisibility(View.GONE);
-                image.setVisibility(View.VISIBLE);
-                text.setVisibility(View.VISIBLE);
-                break;
-        }
         //获取桌面宽度
         final int windowWidth = this.getWindowManager().getDefaultDisplay().getWidth();
         //设置循环体前宽度
@@ -82,8 +65,7 @@ public class LedDisplayActivity extends AppCompatActivity {
             public void run() {
                 scrollView.scrollTo(scrollX, 0);
                 scrollX += (ledViewText.getLedRadius() + ledViewText.getLedSpace());
-                if (scrollX >= (ledViewText.getWidth() + ledViewImage.getWidth() + text.getWidth()
-                        + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
+                if (scrollX >= (ledViewText.getWidth() + image.getWidth() + up.getWidth() + down.getWidth()) - scrollView.getWidth()) {
                     scrollX = (ledViewText.getLedRadius() + ledViewText.getLedSpace());
                 }
                 handler.postDelayed(this, 30);

@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +31,10 @@ import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,6 +98,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         ledViewText.setLedRadius(4);
         ledViewText.setLedSpace(2);
         text_size_seekbar.setProgress(ledViewText.getLedTextSize());
+        //字号大小
         text_size_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -110,13 +117,12 @@ public class LedShowSetActivity extends AppCompatActivity {
 
             }
         });
-
+        //速度大小
         speed_seekbar.setProgress(10);
         speed_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 speedNumber = i;
-                disPlay();
             }
 
             @Override
@@ -185,14 +191,15 @@ public class LedShowSetActivity extends AppCompatActivity {
         ledViewText.setText(input_text.getText().toString());
         //开始循环
         timer.start();
+        Log.i("速度", speedNumber + "");
     }
 
 
-    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, speedNumber) {
+    private CountDownTimer timer = new CountDownTimer(Integer.MAX_VALUE, 10) {
         @Override
         public void onTick(long millisUntilFinished) {
             scrollViewLed.scrollTo(scrollX, 0);
-            scrollX += 5;
+            scrollX += speedNumber;
             if (scrollX >= (ledViewText.getWidth() + image.getWidth() + up.getWidth() +
                     down.getWidth()) - scrollViewLed.getWidth()) {
                 scrollX = 5;
@@ -204,7 +211,6 @@ public class LedShowSetActivity extends AppCompatActivity {
 
         }
     };
-
 
     //显示 颜色选择器
     private void showColorPickerPopupWindow1() {
@@ -273,6 +279,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                             public void onAction(int requestCode, @NonNull String result) {
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result).into(image);
+                                disPlay();
                             }
                         })
                         .start();
@@ -291,12 +298,11 @@ public class LedShowSetActivity extends AppCompatActivity {
                             public void onAction(int requestCode, @NonNull ArrayList<AlbumFile> result) {
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result.get(0).getPath()).into(image);
+                                disPlay();
                             }
                         })
                         .start();
             }
         });
-
     }
-
 }

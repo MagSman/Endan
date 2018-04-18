@@ -19,6 +19,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.my.xxx.endan.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,18 +150,18 @@ public class EZLedView extends View {
         if (attrs == null)
             return;
         TypedArray attributes = getContext().obtainStyledAttributes(attrs,
-                com.my.xxx.mylibrary.R.styleable.EZLedView);
-        ledRadius = attributes.getDimensionPixelSize(com.my.xxx.mylibrary.R.styleable.EZLedView_led_radius, 10);
-        ledSpace = attributes.getDimensionPixelOffset(com.my.xxx.mylibrary.R.styleable.EZLedView_led_space, 2);
-        ledTextSize = attributes.getDimensionPixelOffset(com.my.xxx.mylibrary.R.styleable.EZLedView_text_size, 100);
+                R.styleable.EZLedView);
+        ledRadius = attributes.getDimensionPixelSize(R.styleable.EZLedView_led_radius, 10);
+        ledSpace = attributes.getDimensionPixelOffset(R.styleable.EZLedView_led_space, 2);
+        ledTextSize = attributes.getDimensionPixelOffset(R.styleable.EZLedView_text_size, 100);
 
-        ledColor = attributes.getColor(com.my.xxx.mylibrary.R.styleable.EZLedView_led_color, 0);
-        ledType = attributes.getString(com.my.xxx.mylibrary.R.styleable.EZLedView_led_type);
+        ledColor = attributes.getColor(R.styleable.EZLedView_led_color, 0);
+        ledType = attributes.getString(R.styleable.EZLedView_led_type);
         if (TextUtils.isEmpty(ledText))
             ledType = LED_TYPE_CIRCLE;
 
         if (ledType.equals(LED_TYPE_DRAWABLE)) {
-            int ledLightId = attributes.getResourceId(com.my.xxx.mylibrary.R.styleable.EZLedView_led_drawable, 0);
+            int ledLightId = attributes.getResourceId(R.styleable.EZLedView_led_drawable, 0);
             if (ledLightId != 0) {
                 customLedLightDrawable = getResources().getDrawable(ledLightId);
             }
@@ -167,16 +169,17 @@ public class EZLedView extends View {
                 throw new RuntimeException("Drawable type need you set a image");
         }
 
-        contentType = attributes.getString(com.my.xxx.mylibrary.R.styleable.EZLedView_content_type);
+        contentType = attributes.getString(R.styleable.EZLedView_content_type);
+
         if (TextUtils.isEmpty(contentType)) {
             contentType = CONTENT_TYPE_TEXT;
         }
 
-        int ledImageId = attributes.getResourceId(com.my.xxx.mylibrary.R.styleable.EZLedView_image, 0);
+        int ledImageId = attributes.getResourceId(R.styleable.EZLedView_image, 0);
         if (ledImageId != 0) {
             ledImage = getResources().getDrawable(ledImageId);
         }
-        ledText = attributes.getText(com.my.xxx.mylibrary.R.styleable.EZLedView_text);
+        ledText = attributes.getText(R.styleable.EZLedView_text);
 
         paint.setColor(ledColor);
         paint.setTextSize(ledTextSize);
