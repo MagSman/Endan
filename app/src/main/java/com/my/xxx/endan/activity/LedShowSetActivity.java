@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.Glide;
 import com.my.xxx.endan.R;
+import com.my.xxx.endan.utils.OperationalDataBase;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
 import com.my.xxx.endan.view.EZLedView;
@@ -311,6 +313,9 @@ public class LedShowSetActivity extends AppCompatActivity {
                                 imagePath = result.get(0).getPath();
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result.get(0).getPath()).into(image);
+                                Log.i("保存",result.get(0).getPath());
+                                OperationalDataBase.SaveImage("第五人称", result.get(0).getPath());
+                                //OperationalDataBase.InsertPerson2Bmob();
                                 disPlay();
                             }
                         })

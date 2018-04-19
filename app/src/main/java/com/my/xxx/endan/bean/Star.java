@@ -1,7 +1,7 @@
 package com.my.xxx.endan.bean;
 
 
-import java.io.File;
+
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
@@ -14,6 +14,15 @@ import cn.bmob.v3.datatype.BmobFile;
 public class Star extends BmobObject {
     private String starName;
     private BmobFile file;
+    private String imagepath;
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
 
     public String getStarName() {
         return starName;
