@@ -21,7 +21,9 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.Glide;
 import com.my.xxx.endan.R;
+import com.my.xxx.endan.bean.Star;
 import com.my.xxx.endan.utils.OperationalDataBase;
+import com.my.xxx.endan.utils.StringUtils;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
 import com.my.xxx.endan.view.EZLedView;
@@ -31,10 +33,14 @@ import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class LedShowSetActivity extends AppCompatActivity {
 
@@ -154,6 +160,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
@@ -176,11 +183,15 @@ public class LedShowSetActivity extends AppCompatActivity {
                 showColorPickerPopupWindow2();
                 break;
             case R.id.to_led_show:
-                //去应援
+               /* //去应援
                 if (backgroudColor == 0) {
                     backgroudColor = 7649793;
                 }
-                LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize, speedNumber, imagePath, textInfo);
+                LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize, speedNumber, imagePath, textInfo);*/
+
+
+                QueryStarImage("第五人称");
+                //Log.i("显示的图片地址", imagepath);
                 break;
         }
     }
@@ -313,13 +324,39 @@ public class LedShowSetActivity extends AppCompatActivity {
                                 imagePath = result.get(0).getPath();
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result.get(0).getPath()).into(image);
-                                Log.i("保存",result.get(0).getPath());
-                                OperationalDataBase.SaveImage("第五人称", result.get(0).getPath());
+                                Log.i("保存", result.get(0).getPath());
+                                OperationalDataBase.SaveStarImage("第五人称", result.get(0).getPath());
                                 //OperationalDataBase.InsertPerson2Bmob();
                                 disPlay();
                             }
                         })
                         .start();
+            }
+        });
+    }
+
+    //查询图片
+    public String queryImage() {
+        String starImage = OperationalDataBase.QueryStarImage("第五人称");
+        return starImage;
+    }
+
+    public void QueryStarImage(String starname) {
+        BmobQuery<Star> query = new BmobQuery<Star>();
+        query.addWhereEqualTo("starName", starname);
+        //执行查询方法
+        query.findObjects(new FindListener<Star>() {
+            @Override
+            public void done(List<Star> object, BmobException e) {
+                if (e == null) {
+                    Log.i("查询成功：共", object.size() + "条数据。");
+                    if (!StringUtils.isEmpty(object.get(0).getImagepath())) {
+                        image.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(object.get(0).getImagepath()).into(image);
+                    }
+                } else {
+                    Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                }
             }
         });
     }
