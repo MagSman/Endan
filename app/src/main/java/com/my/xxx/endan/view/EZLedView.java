@@ -223,8 +223,9 @@ public class EZLedView extends View {
         // We are allowed to change the view's mHeight
         boolean resizeHeight = false;
 
-
+        //获得宽的测量模式
         final int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        //获得高的测量模式
         final int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
 
 
