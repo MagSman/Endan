@@ -1,21 +1,19 @@
 package com.my.xxx.endan.view;
 
 import android.app.Activity;
-import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.OnColorChangedListener;
-import com.flask.colorpicker.OnColorSelectedListener;
 import com.my.xxx.endan.R;
 
 //颜色选择器1
-public class ColorPickerPopupWindowView1 {
+public class InputNamePopupWindow {
 
     private Activity context;
     private View container;
@@ -23,46 +21,38 @@ public class ColorPickerPopupWindowView1 {
     private PopupWindow popupWindow;
 
 
-    private SelecteColorListener1 selectecolorlistener;
+    private ReturnInputTextListener returninputtextlistener;
 
-    public void addPickerColorListener(SelecteColorListener1 selectecolorlistener) {
-        this.selectecolorlistener = selectecolorlistener;
+    public void addReturnInputTextListener(ReturnInputTextListener returninputtextlistener) {
+        this.returninputtextlistener = returninputtextlistener;
     }
 
-    public ColorPickerPopupWindowView1(Activity context, View container) {
+    public InputNamePopupWindow(Activity context, View container) {
         this.context = context;
         this.container = container;
         show();
     }
 
     public void initPopupWindow() {
-        rootView = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout
-                .popupwindow_color_picker, null, false);
 
-        RelativeLayout pickerBox = rootView.findViewById(R.id.picker_box);
-        RelativeLayout whiteBlock = rootView.findViewById(R.id.white_block);
-        whiteBlock.setOnClickListener(new View.OnClickListener() {
+        rootView = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout
+                .popupwindow_input_name, null, false);
+
+        RelativeLayout dismissView = rootView.findViewById(R.id.white_block);
+        dismissView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
             }
         });
-        ColorPickerView colorPicker = rootView.findViewById(R.id.color_picker_view);
-        final View colorShow = rootView.findViewById(R.id.color_show);
-        //Shape绘制实用圆圈，并动态改变圆点的颜色
-        final GradientDrawable background = (GradientDrawable) colorShow.getBackground();
-        colorPicker.addOnColorChangedListener(new OnColorChangedListener() {
+
+        final EditText input_name = rootView.findViewById(R.id.input_text);
+        Button search = rootView.findViewById(R.id.serch);
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onColorChanged(int i) {
-                background.setColor(i);
-                selectecolorlistener.onSelectingColor(i);
-            }
-        });
-        colorPicker.addOnColorSelectedListener(new OnColorSelectedListener() {
-            @Override
-            public void onColorSelected(int i) {
-                background.setColor(i);
-                selectecolorlistener.onSelectedColor(i);
+            public void onClick(View v) {
+                returninputtextlistener.getText(input_name.getText().toString());
+                popupWindow.dismiss();
             }
         });
         popupWindow = new PopupWindow(rootView, WindowManager.LayoutParams.MATCH_PARENT,
@@ -82,7 +72,14 @@ public class ColorPickerPopupWindowView1 {
         //popupWindow.setBackgroundDrawable(new PaintDrawable(Color.parseColor("#30000000")));
         // 在中央显示
         popupWindow.showAtLocation(container, Gravity.RIGHT, 0, 0);
+        //showSoftInputFromWindow(context,input_name);
     }
+   /* public static void showSoftInputFromWindow(Context context, EditText editText) {
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        context.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    }*/
 
     public void show() {
         if (popupWindow == null) {
@@ -102,11 +99,8 @@ public class ColorPickerPopupWindowView1 {
         }
     }
 
-    public interface SelecteColorListener1 {
-        void onSelectingColor(int i);
-
-        void onSelectedColor(int i);
+    public interface ReturnInputTextListener {
+        void getText(String str);
     }
-
 
 }

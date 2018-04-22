@@ -24,9 +24,11 @@ import com.my.xxx.endan.R;
 import com.my.xxx.endan.bean.Star;
 import com.my.xxx.endan.utils.OperationalDataBase;
 import com.my.xxx.endan.utils.StringUtils;
+import com.my.xxx.endan.utils.ToastUtils;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView1;
 import com.my.xxx.endan.view.ColorPickerPopupWindowView2;
 import com.my.xxx.endan.view.EZLedView;
+import com.my.xxx.endan.view.InputNamePopupWindow;
 import com.my.xxx.endan.view.SelectImageDialog;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
@@ -49,7 +51,7 @@ public class LedShowSetActivity extends AppCompatActivity {
     @BindView(R.id.display_head_led)
     HorizontalScrollView scrollViewLed;//展示控件
     @BindView(R.id.choice_iamge)
-    ImageView choice_iamge;
+    RelativeLayout choice_iamge;
     @BindView(R.id.input_text)
     EditText input_text;//文字输入框
     @BindView(R.id.up)
@@ -74,6 +76,8 @@ public class LedShowSetActivity extends AppCompatActivity {
     Button to_led_show;
     @BindView(R.id.image)
     ImageView image;//图片
+    @BindView(R.id.choice_net_iamge)
+    RelativeLayout choice_net_iamge;//选择网络图片
 
 
     Activity context;
@@ -88,6 +92,7 @@ public class LedShowSetActivity extends AppCompatActivity {
     int textSize;
     String textInfo;
     String imagePath;
+    private InputNamePopupWindow inputNamePopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,11 +169,16 @@ public class LedShowSetActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.show, R.id.choice_iamge, R.id.text_size, R.id.text_color, R.id
-            .backgroud_color, R.id.to_led_show})
+            .backgroud_color, R.id.to_led_show, R.id.choice_net_iamge})
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.choice_iamge:
+                //选择本地图片
                 selectImageDialog.show();
+                break;
+            case R.id.choice_net_iamge:
+                //选择网络图片
+                showInputStarNamePopupWindow();
                 break;
             case R.id.show:
                 //展示
@@ -183,14 +193,13 @@ public class LedShowSetActivity extends AppCompatActivity {
                 showColorPickerPopupWindow2();
                 break;
             case R.id.to_led_show:
-               /* //去应援
+                //去应援
                 if (backgroudColor == 0) {
                     backgroudColor = 7649793;
                 }
-                LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize, speedNumber, imagePath, textInfo);*/
+                LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize,
+                speedNumber, imagePath, textInfo);
 
-
-                QueryStarImage("第五人称");
                 //Log.i("显示的图片地址", imagepath);
                 break;
         }
@@ -281,10 +290,49 @@ public class LedShowSetActivity extends AppCompatActivity {
         }
     }
 
+    //显示 输入框  输入明星姓名
+    private void showInputStarNamePopupWindow() {
+        if (inputNamePopupWindow == null) {
+            inputNamePopupWindow = new InputNamePopupWindow(context, up);
+            inputNamePopupWindow.addReturnInputTextListener(new InputNamePopupWindow
+                    .ReturnInputTextListener() {
+                @Override
+                public void getText(String str) {
+                    //TODO 搜索的人名
+                    QueryStarImage(str);
+                }
+            });
+
+        } else {
+            inputNamePopupWindow.show();
+        }
+    }
+
     public static void startIntent(Context context) {
         Intent intent = new Intent(context, LedShowSetActivity.class);
         context.startActivity(intent);
     }
+
+   /* @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //return super.onKeyDown(keyCode, event);
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (colorPickerPopupWindowView1 != null) {
+                colorPickerPopupWindowView1.dismiss();
+            }
+            if (colorPickerPopupWindowView2 != null) {
+                colorPickerPopupWindowView2.dismiss();
+            }
+            if (inputNamePopupWindow != null) {
+                inputNamePopupWindow.dismiss();
+            }
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }*/
+
 
     /**
      * 选择图片弹窗
@@ -320,13 +368,13 @@ public class LedShowSetActivity extends AppCompatActivity {
                         .columnCount(3)
                         .onResult(new Action<ArrayList<AlbumFile>>() {
                             @Override
-                            public void onAction(int requestCode, @NonNull ArrayList<AlbumFile> result) {
+                            public void onAction(int requestCode, @NonNull ArrayList<AlbumFile>
+                                    result) {
                                 imagePath = result.get(0).getPath();
                                 image.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(result.get(0).getPath()).into(image);
                                 Log.i("保存", result.get(0).getPath());
                                 OperationalDataBase.SaveStarImage("第五人称", result.get(0).getPath());
-                                //OperationalDataBase.InsertPerson2Bmob();
                                 disPlay();
                             }
                         })
@@ -341,6 +389,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         return starImage;
     }
 
+    //查询图片
     public void QueryStarImage(String starname) {
         BmobQuery<Star> query = new BmobQuery<Star>();
         query.addWhereEqualTo("starName", starname);
@@ -356,6 +405,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                     }
                 } else {
                     Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                    ToastUtils.showToast(context, "对不起还没有相关图片!!!");
                 }
             }
         });

@@ -1,41 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/text_home_group"
-    tools:context="com.my.xxx.endan.activity.LedShowSetActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/text_home_group"
+                tools:context="com.my.xxx.endan.activity.LedShowSetActivity">
 
     <include
         android:id="@+id/display_head_led"
         layout="@layout/shwo_horizontal_scrollview_led"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="150dp"/>
 
-    <ImageView
+    <RelativeLayout
         android:id="@+id/choice_iamge"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/display_head_led"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_launcher" />
+        android:background="@drawable/button_backgroud">
+
+        <ImageView
+            android:id="@+id/location_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/location_image"
+            android:text="本地图片"
+            android:textColor="@color/led_color"
+            android:textSize="17sp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/choice_net_iamge"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/display_head_led"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_backgroud"
+        >
+
+        <ImageView
+            android:id="@+id/net_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/net_image"
+            android:text="网络图片"
+            android:textColor="@color/led_color"
+            android:textSize="17sp"/>
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/input_text_box"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/display_head_led"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/choice_iamge"
+        android:layout_marginTop="15dp"
         android:background="@drawable/input_banckgroud"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_below="@+id/choice_iamge"
+        android:layout_alignLeft="@+id/show"
+        android:layout_alignStart="@+id/show">
 
         <EditText
             android:id="@+id/input_text"
@@ -44,7 +94,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@null"
-            android:lines="1" />
+            android:lines="1"
+            android:textCursorDrawable="@null"/>
 
     </RelativeLayout>
 
@@ -52,16 +103,15 @@
         android:id="@+id/show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/choice_iamge"
-        android:layout_marginLeft="15dp"
+        android:layout_alignLeft="@+id/text_color"
+        android:layout_alignStart="@+id/text_color"
+        android:layout_below="@+id/input_text_box"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_backgroud"
         android:text="效果预览"
         android:textColor="@color/led_color"
-        android:textSize="17sp" />
+        android:textSize="17sp"/>
 
     <Button
         android:id="@+id/text_color"
@@ -73,7 +123,7 @@
         android:background="@drawable/button_backgroud"
         android:text="文字颜色"
         android:textColor="@color/led_color"
-        android:textSize="17sp" />
+        android:textSize="17sp"/>
 
     <Button
         android:id="@+id/backgroud_color"
@@ -86,7 +136,7 @@
         android:background="@drawable/button_backgroud"
         android:text="背景颜色"
         android:textColor="@color/led_color"
-        android:textSize="17sp" />
+        android:textSize="17sp"/>
 
 
     <RelativeLayout
@@ -104,7 +154,7 @@
             android:background="@drawable/button_backgroud"
             android:text="字号"
             android:textColor="@color/led_color"
-            android:textSize="17sp" />
+            android:textSize="17sp"/>
 
         <SeekBar
             android:id="@+id/text_size_seekbar"
@@ -114,7 +164,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_toRightOf="@+id/text_size"
-            android:max="600" />
+            android:max="600"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -132,7 +182,7 @@
             android:background="@drawable/button_backgroud"
             android:text="速度"
             android:textColor="@color/led_color"
-            android:textSize="17sp" />
+            android:textSize="17sp"/>
 
         <SeekBar
             android:id="@+id/speed_seekbar"
@@ -142,7 +192,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_toRightOf="@+id/speed"
-            android:max="25" />
+            android:max="25"/>
     </RelativeLayout>
 
     <Button
@@ -155,6 +205,6 @@
         android:background="@drawable/button_backgroud"
         android:text="应援"
         android:textColor="@color/led_color"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
 </RelativeLayout>

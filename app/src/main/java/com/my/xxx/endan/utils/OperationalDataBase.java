@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.my.xxx.endan.bean.Person;
 import com.my.xxx.endan.bean.Star;
-
+import com.my.xxx.endan.endan.Endan;
 
 import java.io.File;
 import java.util.List;
@@ -16,7 +16,6 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import cn.bmob.v3.listener.UploadBatchListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
@@ -110,8 +109,10 @@ public class OperationalDataBase {
                         public void done(String s, BmobException e) {
                             if (e == null) {
                                 Log.i("保存成功2", imagename);
+                                ToastUtils.showToast(Endan.getEndanContext(), "保存成功");
                             } else {
                                 Log.i("保存失败3", e.getMessage() + "---" + e.getErrorCode());
+                                ToastUtils.showToast(Endan.getEndanContext(), "保存失败");
                             }
                         }
                     });

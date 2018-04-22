@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Button normal_style;
     @BindView(R.id.personality_style)
     Button personality_style;
+    @BindView(R.id.setting)
+    Button setting;
 
     private Activity context;
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.led_style, R.id.normal_style, R.id.personality_style})
+    @OnClick({R.id.led_style, R.id.normal_style, R.id.personality_style, R.id.setting})
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.led_style:
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.personality_style:
                 PersonalityActivity.startIntent(context);
+                break;
+            case R.id.setting:
+                SettingActivity.startIntent(context);
                 break;
         }
     }
