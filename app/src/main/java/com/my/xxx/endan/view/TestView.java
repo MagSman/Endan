@@ -13,16 +13,16 @@ import android.view.View;
  * 250135506@qq.com
  */
 
-public class TextView extends View {
-    public TextView(Context context) {
+public class TestView extends View {
+    public TestView(Context context) {
         super(context);
     }
 
-    public TextView(Context context, @Nullable AttributeSet attrs) {
+    public TestView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TestView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -30,6 +30,7 @@ public class TextView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -42,7 +43,7 @@ public class TextView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.GREEN);
+        //canvas.drawColor(Color.GREEN);
         Paint paint = new Paint();
         paint.setColor(Color.GRAY);
 
@@ -50,6 +51,6 @@ public class TextView extends View {
     }
 
 
-    //
+
 
 }

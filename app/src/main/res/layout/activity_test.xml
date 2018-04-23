@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.my.xxx.endan.view.TextView
+    <com.my.xxx.endan.view.TestView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

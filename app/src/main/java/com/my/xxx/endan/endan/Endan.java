@@ -50,6 +50,7 @@ public class Endan extends Application {
         });
         // 启动推送服务
         BmobPush.startWork(this);
+        //AdManager.getInstance(Context context).init(String appId, String appSecret, boolean isEnableYoumiLog);
 
 
     }
