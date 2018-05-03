@@ -148,7 +148,7 @@ public class LedShowSetActivity extends AppCompatActivity {
 
             }
         });
-
+        //输入框监听
         input_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -194,11 +194,8 @@ public class LedShowSetActivity extends AppCompatActivity {
                 break;
             case R.id.to_led_show:
                 //去应援
-                if (backgroudColor == 0) {
-                    backgroudColor = 7649793;
-                }
                 LedDisplayActivity.startIntent(context, textColor, backgroudColor, textSize,
-                speedNumber, imagePath, textInfo);
+                        speedNumber, imagePath, textInfo);
 
                 //Log.i("显示的图片地址", imagepath);
                 break;
@@ -313,27 +310,6 @@ public class LedShowSetActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-   /* @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //return super.onKeyDown(keyCode, event);
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            if (colorPickerPopupWindowView1 != null) {
-                colorPickerPopupWindowView1.dismiss();
-            }
-            if (colorPickerPopupWindowView2 != null) {
-                colorPickerPopupWindowView2.dismiss();
-            }
-            if (inputNamePopupWindow != null) {
-                inputNamePopupWindow.dismiss();
-            }
-            return false;
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-
-    }*/
-
-
     /**
      * 选择图片弹窗
      */
@@ -395,6 +371,7 @@ public class LedShowSetActivity extends AppCompatActivity {
         query.addWhereEqualTo("starName", starname);
         //执行查询方法
         query.findObjects(new FindListener<Star>() {
+
             @Override
             public void done(List<Star> object, BmobException e) {
                 if (e == null) {
@@ -402,6 +379,7 @@ public class LedShowSetActivity extends AppCompatActivity {
                     if (!StringUtils.isEmpty(object.get(0).getImagepath())) {
                         image.setVisibility(View.VISIBLE);
                         Glide.with(context).load(object.get(0).getImagepath()).into(image);
+                        imagePath = object.get(0).getImagepath();
                     }
                 } else {
                     Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());

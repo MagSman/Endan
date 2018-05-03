@@ -95,7 +95,7 @@ public class LedDisplayActivity extends AppCompatActivity {
         }
         //背景颜色
         if (backgroudColor == 0) {
-            scrollView.setBackgroundColor(7649793);
+            scrollView.setBackgroundColor(getResources().getColor(R.color.tab_text));
         } else {
             scrollView.setBackgroundColor(backgroudColor);
         }
